@@ -19,46 +19,30 @@ app.post('/chat', async (req, res) => {
       {
         model: 'deepseek-ai/DeepSeek-R1-Distill-Llama-70B-free',
         messages: [
-          {
-            role: 'system',
-            content: `Your name is Nova. You are a helpful, respectful assistant created by the Nova Team.
-NEVER mention DeepSeek or DeepSeek-R1. NEVER say who made your model. NEVER say "I am DeepSeek-R1".
-If the user asks who created you, say: "I was created by the Nova Team."`,
-          },
-          {
-            role: 'user',
-            content: message,
-          },
+          { role: 'system', content: 'You are Nova, a helpful and respectful AI assistant. Do not include <think> tags or internal thoughts. Only respond directly and clearly, in a friendly tone. Never mention DeepSeek or any creators.' },
+          { role: 'user', content: message }
         ],
       },
       {
         headers: {
           Authorization: `Bearer ${API_KEY}`,
           'Content-Type': 'application/json',
-          'HTTP-Referer': 'http://localhost:3000',
-          'X-Title': 'NovaChat',
         },
       }
     );
 
-    // 🧹 Regex Filter to Force Remove Any Branding
-    let raw = response.data.choices[0].message.content;
+    let reply = response.data.choices[0].message.content;
 
-    const clean = raw
-      .replace(/DeepSeek-R1/gi, 'Nova')
-      .replace(/DeepSeek/gi, 'Nova')
-      .replace(/created by [^\.\n]+/gi, 'created by the Nova Team')
-      .replace(/I'm Nova[^\.]*\./gi, "I'm Nova.") // Normalize custom identity
-      .replace(/I am DeepSeek[^\.]*\./gi, "I'm Nova.") // Remove fallback identity
-      .replace(/Greetings!.*?(?=\n|$)/gi, '') // Remove that whole intro sentence
-      .replace(/^\s+/, '') // Trim beginning whitespace
-      .trim();
+    // Strip out <think> tags or anything inside them, just in case
+    reply = reply.replace(/<think>.*?<\/think>/gs, '').trim();
 
-    res.json({ reply: clean });
+    res.json({ reply });
   } catch (error) {
     console.error('API Error:', error.response?.data || error.message);
     res.status(500).json({ error: 'Something went wrong!' });
   }
 });
 
-app.listen(PORT, () => console.log(`✅ Server running at http://localhost:${PORT}`));
+app.listen(PORT, () =>
+  console.log(`✅ Nova server running at http://localhost:${PORT}`)
+);
