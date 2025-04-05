@@ -1,0 +1,159 @@
+/* 🌟 Full-Screen Gradient Background */
+.chat-window-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #6a11cb, #2575fc); /* Purple to Blue */
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* 💬 Chat Window (Full-Screen Layout) */
+.chat-window {
+  width: 100%;
+  max-width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85); /* Semi-transparent Dark */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 📜 Chat Messages (Scrollable) */
+.message-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+/* 🚀 Chat Bubbles */
+.message {
+  max-width: 75%;
+  padding: 12px 16px;
+  border-radius: 20px;
+  margin: 8px 0;
+  font-size: 15px;
+  word-wrap: break-word;
+  line-height: 1.5;
+  display: inline-block;
+}
+
+/* 🧑 User Message */
+.message.user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  color: #000;
+  text-align: right;
+  border-bottom-right-radius: 0;
+}
+
+/* 🤖 Bot Message */
+.message.bot {
+  align-self: flex-start;
+  background: linear-gradient(135deg, #8EC5FC, #E0C3FC);
+  color: #000;
+  text-align: left;
+  border-bottom-left-radius: 0;
+}
+
+/* 🎤 ChatGPT-Style Input Box */
+.input-container {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+/* ⌨️ ChatGPT-Like Input Field */
+.custom-input {
+  flex: 1;
+  padding: 15px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  outline: none;
+  font-size: 16px;
+  width: auto;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Placeholder Text */
+.custom-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+}
+
+/* Focus Effect (Glowing Border) */
+.custom-input:focus {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+/* 🚀 Send Button */
+.custom-btn {
+  margin-left: 10px;
+  padding: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 50px;
+}
+
+/* Send Button Hover */
+.custom-btn:hover {
+  background: linear-gradient(135deg, #ff5f6d, #ff7eb3);
+  transform: scale(1.1);
+}
+
+/* Disabled Button */
+.custom-btn:disabled {
+  background: gray;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+  .custom-input {
+    font-size: 14px;
+    padding: 14px;
+  }
+
+  .custom-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-input {
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .custom-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 13px;
+  }
+}
