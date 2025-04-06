@@ -1,4 +1,3 @@
-// src/components/MessageList.jsx
 import React from 'react';
 
 const MessageList = ({ messages }) => {
