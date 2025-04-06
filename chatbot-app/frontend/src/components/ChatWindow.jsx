@@ -29,9 +29,21 @@ const ChatWindow = () => {
     }
   };
 
+  const handleClearChat = () => {
+    setMessages([]);
+    localStorage.removeItem('novaMessages');
+  };
+
   return (
     <div className="chat-window-container">
       <div className="chat-window bg-dark text-light p-3 rounded shadow d-flex flex-column">
+        <div className="d-flex justify-content-between align-items-center mb-2">
+          <h5 className="m-0">Nova Assistant</h5>
+          <button onClick={handleClearChat} className="btn btn-sm btn-outline-light">
+            Clear Chat
+          </button>
+        </div>
+
         <MessageList messages={messages} />
         {isLoading && <div className="text-center text-info">Typing...</div>}
         <MessageInput input={input} setInput={setInput} handleSend={handleSend} isLoading={isLoading} />
