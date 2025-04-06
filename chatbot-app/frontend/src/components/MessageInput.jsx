@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MessageInput = ({ input, setInput, handleSend, isLoading }) => {
+const MessageInput = ({ input, setInput, handleSend, isLoading, clearChat }) => {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && input.trim() && !isLoading) handleSend();
   };
@@ -10,7 +10,7 @@ const MessageInput = ({ input, setInput, handleSend, isLoading }) => {
       <div className="input-group">
         <input
           type="text"
-          className="form-control bg-dark text-light border-secondary"
+          className="form-control bg-dark text-light border-secondary custom-input"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
@@ -19,11 +19,18 @@ const MessageInput = ({ input, setInput, handleSend, isLoading }) => {
         />
         <button
           onClick={handleSend}
-          className="btn btn-primary"
+          className="btn btn-primary custom-btn"
           disabled={!input.trim() || isLoading}
         >
           {isLoading ? '...' : 'Send'}
         </button>
+        {/* <button
+          onClick={clearChat}
+          className="btn btn-outline-danger ms-2"
+          disabled={isLoading}
+        >
+          Clear
+        </button> */}
       </div>
     </div>
   );
